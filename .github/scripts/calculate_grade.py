@@ -14,8 +14,8 @@ BASIC_TASKS = [
     ("login_form",          3,  "once",       None),
     ("form_with_user",      3,  "once",       None),
     ("logout",              2,  "once",       None),
-    ("fill_input",          1,  "repeatable", 5),
-    ("send_form",           1,  "repeatable", 5),
+    ("fill_input",          1,  "repeatable", 10),
+    ("send_form",           1,  "repeatable", 10),
     ("static_page_test",    2,  "once",       None),
     ("multiple_page_test",  3,  "once",       None),
     ("complex_xpath",       1,  "repeatable", 10),
@@ -210,19 +210,6 @@ def main():
     final_grade = min(points_grade, quality_cap)
 
     print("=" * 60)
-    print("SUMMARY")
-    print("=" * 60)
-    print()
-    print(f"  Overall points:    {overall}")
-    print(f"  Advanced points:   {advanced_total}")
-    print(f"  Grade from points: {points_grade}")
-    print(f"  Quality cap:       {quality_cap}")
-    print(f"  Final grade:       {final_grade}")
-    print()
-    if final_grade < points_grade:
-        print(f"  Your points would give you grade {points_grade},")
-        print(f"  but quality requirements cap it at {final_grade}.")
-        print()
     print("  Grade thresholds:")
     print("    Grade 2: 25 overall,  0 advanced")
     print("    Grade 3: 40 overall,  5 advanced")
@@ -230,7 +217,23 @@ def main():
     print("    Grade 5: 80 overall, 20 advanced")
     print()
     print("=" * 60)
+    print("SUMMARY")
+    print("=" * 60)
+    print()
+    print(f"  Overall points:    {overall}")
+    print(f"  Advanced points:   {advanced_total}")
+    print(f"  Grade from points: {points_grade}")
+    print(f"  Quality cap:       {quality_cap}")
+    
+    if final_grade < points_grade:
+        print(f"  Your points would give you grade {points_grade},")
+        print(f"  but quality requirements cap it at {final_grade}.")
+        print()
 
+    print("=" * 60)
+    print(f"  Final grade:       {final_grade}")    
+    print("=" * 60)
+    print()
     if errors:
         sys.exit(1)
 
