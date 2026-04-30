@@ -9,7 +9,22 @@
 
 student:
   website_under_test: ""
-
+    
+    
+# ----------------------------------------------------------
+# AI usage (optional but appreciated)
+# ----------------------------------------------------------
+# If you used any AI tools (ChatGPT, Claude, Copilot, etc.)
+# while working on this assignment, briefly describe how.
+# This has no effect on your grade.
+# ----------------------------------------------------------
+ai_usage:
+  used: false
+  tools: ""           # e.g. "Claude, GitHub Copilot"
+  description: ""     # e.g. "Used Claude to generate initial Page Object 
+                       #  classes, then modified them manually. Used Copilot 
+                       #  for autocomplete while writing test methods."
+                       
 # ----------------------------------------------------------
 # Quality requirements (gatekeepers)
 # ----------------------------------------------------------
@@ -195,3 +210,4 @@ advanced:
     done: false
     description: "Run tests inside a Docker container (e.g. using docker-compose with Selenium Grid)"
     link: "https://www.selenium.dev/documentation/grid/getting_started/"
+
