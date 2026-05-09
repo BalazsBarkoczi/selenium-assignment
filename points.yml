@@ -8,7 +8,7 @@
 # ============================================================
 
 student:
-  website_under_test: ""
+  website_under_test: "https://invoiceninja.com/"
     
     
 # ----------------------------------------------------------
@@ -19,9 +19,9 @@ student:
 # This has no effect on your grade.
 # ----------------------------------------------------------
 ai_usage:
-  used: false
-  tools: ""           # e.g. "Claude, GitHub Copilot"
-  description: ""     # e.g. "Used Claude to generate initial Page Object 
+  used: true
+  tools: "GitHub Copilot"           # e.g. "Claude, GitHub Copilot"
+  description: "Generate boilerplate code"     # e.g. "Used Claude to generate initial Page Object 
                        #  classes, then modified them manually. Used Copilot 
                        #  for autocomplete while writing test methods."
                        
@@ -33,19 +33,19 @@ ai_usage:
 # ----------------------------------------------------------
 quality:
   gitignore:                 # required for grade 2+
-    done: false
+    done: true
     description: "Unnecessary files are ignored (.gitignore covers build output, IDE files, etc.)"
 
   structured_code:           # required for grade 3+
-    done: false
+    done: true
     description: "Code is organized into classes and functions, not one big file"
 
   readable_code:             # required for grade 4+
-    done: false
+    done: true
     description: "Function and method names describe what they do, test suite reads like a test description"
 
   low_redundancy:            # required for grade 5
-    done: false
+    done: true
     description: "Minimal code duplication, shared logic is extracted into reusable methods"
 
 # ----------------------------------------------------------
