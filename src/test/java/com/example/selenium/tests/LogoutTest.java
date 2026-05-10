@@ -1,44 +1,46 @@
 package com.example.selenium.tests;
 
 import com.example.selenium.config.DriverConfig;
+import com.example.selenium.pages.DashboardPage;
 import com.example.selenium.pages.LoginPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
-public class LoginTest {
-    
-    private WebDriver driver;
-    private LoginPage loginPage;
-    
+/**
+ * Test logging out from the application after a successful login.
+ */
+public class LogoutTest extends BaseTest {
 
     @BeforeEach
-    public void setUp() {
+    public void setup() {
         driver = DriverConfig.initializeDriver();
-        loginPage = new LoginPage(driver);
     }
-    
 
     @AfterEach
     public void tearDown() {
         DriverConfig.quitDriver(driver);
     }
-    
 
     @Test
-    public void testLoginFormAndSubmit(){
+    public void testLogout() {
+        LoginPage loginPage = new LoginPage(driver);
         loginPage.navigateToLoginPage();
-
-        assertTrue(loginPage.isLoginButtonVisible(), "Login button should be visible before login attempt");
 
         String testEmail = System.getenv("TEST_EMAIL");
         String testPassword = System.getenv("TEST_PASSWORD");
 
         loginPage.loginWithEmailAndPassword(testEmail, testPassword);
         Assertions.assertTrue(loginPage.waitForSuccessfulLogin(), "Login did not complete successfully");
+
+        DashboardPage dashboardPage = new DashboardPage(driver);
+        LoginPage returnedLoginPage = dashboardPage.logout();
+
+        Assertions.assertTrue(
+            returnedLoginPage.isLoginButtonVisible(),
+            "Login page should be visible after logout"
+        );
     }
 }
