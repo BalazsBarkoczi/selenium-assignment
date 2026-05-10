@@ -1,0 +1,14 @@
+services:
+  selenium:
+    image: selenium/standalone-chrome:latest
+    shm_size: "2gb"
+
+  tests:
+    build:
+      context: .
+    environment:
+      SELENIUM_REMOTE_URL: http://selenium:4444/wd/hub
+      CHROME_HEADLESS: "true"
+    depends_on:
+      - selenium
+    command: mvn test
