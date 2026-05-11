@@ -1,23 +1,10 @@
 package com.example.selenium.tests;
 
-import com.example.selenium.config.DriverConfig;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 public class StaticPageTest extends BaseTest {
-
-    @BeforeEach
-    public void setUp() {
-        driver = DriverConfig.initializeDriver();
-    }
-
-    @AfterEach
-    public void tearDown() {
-        DriverConfig.quitDriver(driver);
-    }
 
     @Test
     public void testStaticHomePageContentAndElements() {
