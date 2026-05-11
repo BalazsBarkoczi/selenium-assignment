@@ -1,19 +1,43 @@
 services:
-  selenium:
-    image: selenium/standalone-chrome:latest
-    shm_size: "2gb"
+  # A központi irányító (Hub)
+  selenium-hub:
+    image: selenium/hub:4.23.0
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
 
-  tests:
-    build:
-      context: .
-      args:
-        TEST_EMAIL: ${TEST_EMAIL:-}
-        TEST_PASSWORD: ${TEST_PASSWORD:-}
-    environment:
-      SELENIUM_REMOTE_URL: http://selenium:4444
-      CHROME_HEADLESS: "true"
-      TEST_EMAIL: ${TEST_EMAIL:-}
-      TEST_PASSWORD: ${TEST_PASSWORD:-}
+  # Chrome böngésző konténer
+  chrome:
+    image: selenium/node-chrome:4.23.0
+    shm_size: '2gb'
     depends_on:
-      - selenium
-    command: mvn test
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+
+  # Firefox böngésző konténer (ÚJ!)
+  firefox:
+    image: selenium/node-firefox:4.23.0
+    shm_size: '2gb'
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+
+  # A te Java tesztjeidet futtató konténer
+  tests:
+    build: .
+    depends_on:
+      - selenium-hub
+      - chrome
+      - firefox
+    environment:
+      - SELENIUM_REMOTE_URL=http://selenium-hub:4444/wd/hub
+      - TEST_EMAIL=${TEST_EMAIL}
+      - TEST_PASSWORD=${TEST_PASSWORD}
+      - CHROME_HEADLESS=true
+      - BROWSER=${BROWSER:-chrome}
