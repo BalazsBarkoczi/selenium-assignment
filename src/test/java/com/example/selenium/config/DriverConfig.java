@@ -16,7 +16,7 @@ public class DriverConfig {
 
     public static WebDriver initializeDriver() {
         Map<String, String> env = System.getenv();
-        boolean headless = Boolean.parseBoolean(env.getOrDefault("CHROME_HEADLESS", "false"));
+        boolean headless = Boolean.parseBoolean(env.getOrDefault("CHROME_HEADLESS", "true"));
         String remoteUrl = env.get("SELENIUM_REMOTE_URL");
 
         String envBrowser = Config.get("BROWSER");
@@ -24,7 +24,7 @@ public class DriverConfig {
             envBrowser = "chrome";
         }
         String browser = System.getProperty("browser", envBrowser).toLowerCase();
-        // (Docker / Selenium Grid esetén)
+        // (Docker / Selenium Grid)
         if (remoteUrl != null && !remoteUrl.isBlank()) {
             try {
                 if (browser.equals("firefox")) {

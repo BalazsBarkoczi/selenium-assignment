@@ -38,8 +38,6 @@ public class BaseTest {
         String testEmail = Config.get("TEST_EMAIL");
         String testPassword = Config.get("TEST_PASSWORD");
 
-        System.out.println("[DEBUG] Próbálkozás ezzel az e-maillal: " + testEmail);
-
         loginPage.loginWithEmailAndPassword(testEmail, testPassword);
         Assertions.assertTrue(loginPage.waitForSuccessfulLogin(), "Login did not complete successfully");
 
