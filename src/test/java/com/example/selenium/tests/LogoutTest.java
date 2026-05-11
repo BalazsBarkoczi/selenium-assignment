@@ -7,11 +7,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
 
-/**
- * Test logging out from the application after a successful login.
- */
+
 public class LogoutTest extends BaseTest {
 
     @BeforeEach
@@ -24,7 +21,7 @@ public class LogoutTest extends BaseTest {
         DriverConfig.quitDriver(driver);
     }
 
-    @Test
+@Test
     public void testLogout() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.navigateToLoginPage();
@@ -36,6 +33,9 @@ public class LogoutTest extends BaseTest {
         Assertions.assertTrue(loginPage.waitForSuccessfulLogin(), "Login did not complete successfully");
 
         DashboardPage dashboardPage = new DashboardPage(driver);
+        
+        Assertions.assertTrue(dashboardPage.isDashboardLoaded(), "Dashboard failed to load after login");
+
         LoginPage returnedLoginPage = dashboardPage.logout();
 
         Assertions.assertTrue(

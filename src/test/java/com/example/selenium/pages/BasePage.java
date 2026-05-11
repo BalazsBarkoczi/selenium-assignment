@@ -3,6 +3,7 @@ package com.example.selenium.pages;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -23,7 +24,22 @@ public class BasePage {
     }
 
     protected void clickElement(By locator) {
-        wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+        int attempts = 0;
+        while (attempts < 3) {
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+                break;
+            } catch (StaleElementReferenceException e) {
+                attempts++;
+                if (attempts == 3) {
+                    throw e;
+                }
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ignored) {
+                }
+            }
+        }
     }
 
     protected void typeText(By locator, String text) {
