@@ -1,5 +1,6 @@
 package com.example.selenium.tests;
 
+import com.example.selenium.config.Config;
 import com.example.selenium.config.DriverConfig;
 import com.example.selenium.pages.DashboardPage;
 import com.example.selenium.pages.LoginPage;
@@ -28,8 +29,8 @@ public class LogoutTest {
         LoginPage loginPage = new LoginPage(localDriver);
         loginPage.navigateToLoginPage();
 
-        String testEmail = System.getenv("TEST_EMAIL");
-        String testPassword = System.getenv("TEST_PASSWORD");
+        String testEmail = Config.get("TEST_EMAIL");
+        String testPassword = Config.get("TEST_PASSWORD");
 
         loginPage.loginWithEmailAndPassword(testEmail, testPassword);
         Assertions.assertTrue(loginPage.waitForSuccessfulLogin(), "Login did not complete successfully");
