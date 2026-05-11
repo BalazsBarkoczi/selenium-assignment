@@ -115,7 +115,7 @@ basic:
     link: "https://www.selenium.dev/documentation/webdriver/waits/"
 
   page_title:                # 1 pt | once
-    done: false
+    done: true
     description: "Read and verify the page title using getTitle()"
 
   page_object_pattern:       # 3 pts | once

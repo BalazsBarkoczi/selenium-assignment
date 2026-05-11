@@ -30,6 +30,15 @@ public class LoginTest {
     
 
     @Test
+    public void testPageTitleIsLoadedOnLoginPage() {
+        loginPage.navigateToLoginPage();
+
+        String title = driver.getTitle();
+        Assertions.assertFalse(title == null || title.isBlank(), "Page title should not be empty");
+        Assertions.assertTrue(title.toLowerCase().contains("invoice"), "Page title should contain 'invoice'");
+    }
+
+    @Test
     public void testLoginFormAndSubmit(){
         loginPage.navigateToLoginPage();
 
